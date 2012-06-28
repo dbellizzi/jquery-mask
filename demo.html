@@ -1,0 +1,78 @@
+<html>
+<head>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" />
+<script type="text/javascript" src="https://raw.github.com/dbellizzi/jquery-mask/master/jquery-mask.js" />
+<script type="text/javascript">
+
+function testBoxes() {
+  var boxes = [];
+  var backgrounds = ['red', 'blue', 'green', 'orange', 'yellow', 'white', 'purple'];
+  for (var i = 0; i < 20; i++) {
+    var box = jQuery('<div class="box" style="position: absolute;"></div>');
+    var topRand = Math.floor(Math.random() * 1000);
+    var leftRand = Math.floor(Math.random() * 1000);
+    box.css('background-color', backgrounds[i % backgrounds.length]);
+    box.css('margin', Math.floor(Math.random() * 5) + 'px');
+    box.css('border', Math.floor(Math.random() * 5) + 'px black solid');
+    box.css('padding', Math.floor(Math.random() * 5) + 'px');
+    box.css('height', Math.floor(Math.random() * 90 + 10) + 'px');
+    box.css('width', Math.floor(Math.random() * 90 + 10) + 'px');
+    box.css('top', topRand);
+    box.css('left', leftRand);
+    jQuery('body').append(box);
+  }
+
+  jQuery(document).mask('.box');
+
+  var dims = [];
+  jQuery('.mask').each(function() {
+    var dim = jQuery.mask.getDims(jQuery(this));
+    dim.src = this;
+    dims.push(dim);
+  });
+  var maskDims = dims.slice();
+
+  jQuery('.box').each(function() {
+    var dim = jQuery.mask.getDims(jQuery(this));
+    dim.src = this;
+    dims.push(dim);
+  });
+
+  var testCount = 0;
+  for (var i = 0; i < maskDims.length; i++) {
+    for (var j = i + 1; j < dims.length; j++) {
+      if (jQuery.mask.dimsOverlap(maskDims[i], dims[j]) && console.log) {
+        console.log('test failed', jQuery(maskDims[i].src), jQuery(dims[j].src));
+      }
+      testCount++;
+    }
+  }
+  if (console.log) {
+    console.log('test done, ' + maskDims.length + ' masking divs, ' + testCount + ' pairs checked for overlap.');
+  }
+}
+
+jQuery(document).ready(function() {
+  testBoxes();
+});
+
+jQuery(window).resize(function() {
+  jQuery(document).mask('.box');
+});
+
+</script>
+<style type="text/css">
+.mask {
+  z-index: 500000;
+  position: absolute;
+  background-color: #000;
+  opacity: 0.5;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
+}
+</style>
+</head>
+<body>
+jQuery Mask Demo
+</body>
+</html>
