@@ -17,6 +17,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+console.log('here');
 (function($) {
 
   // NOTE: dimension objects are assumed to be immutable
