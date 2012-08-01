@@ -1,8 +1,8 @@
 /*
    jQuery Mask Plugin
-   
+
    https://github.com/dbellizzi/jquery-mask
-   
+
    Copyright 2012 Dominick Bellizzi
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,9 +22,9 @@
   // NOTE: dimension objects are assumed to be immutable
 
   $.fn.mask = function(elems, options) {
-  
+
 	var settings = $.extend( {
-      'className' : 'mask',
+      'className' : 'mask'
     }, options);
 
     $('.' + settings.className).remove();
@@ -108,8 +108,8 @@
   };
 
   $.mask.dimsOverlap = function(dims1, dims2) {
-    return !(dims2.top + dims2.height <= dims1.top || dims1.top + dims1.height <= dims2.top
-             || dims2.left + dims2.width <= dims1.left || dims1.left + dims1.width <= dims2.left);
+    return !(dims2.top + dims2.height <= dims1.top || dims1.top + dims1.height <= dims2.top ||
+             dims2.left + dims2.width <= dims1.left || dims1.left + dims1.width <= dims2.left);
   };
 
   $.mask.getMaskDimsList = function(containerDims, dims) {
