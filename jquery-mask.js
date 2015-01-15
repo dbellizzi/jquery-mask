@@ -65,7 +65,7 @@
   $.mask.getDims = function(elem) {
     elem = $(elem);
     var dims = elem.offset();
-    if (dims === null) {
+    if (!dims) {
       // document has no offset, but has different height/width than body
       dims = { top: 0, left: 0 };
     }
